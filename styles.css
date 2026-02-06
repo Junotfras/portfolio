@@ -202,6 +202,34 @@ footer {
   font-size: 0.9rem;
 }
 
+/* =========================
+   LIGHT MODE OVERRIDES
+   ========================= */
+
+/* 1. Fix "Junotfras" Name Contrast */
+/* When in light mode, make the text gradient dark grey so it pops */
+body.light-mode #welcome-section h1 {
+  background: linear-gradient(to right, #111827, #4b5563);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 2. Keep Navbar Dark & Legible */
+/* Even in light mode, force navbar text to stay light color */
+body.light-mode #navbar {
+  background: rgba(22, 26, 34, 0.95); /* Keep dark background */
+  border-bottom: 1px solid #262b36;   /* Keep dark border */
+}
+
+body.light-mode #navbar a,
+body.light-mode #navbar button {
+  color: #e6e7eb; /* Force white text */
+}
+
+body.light-mode #navbar .nav-link:hover {
+  background: rgba(255, 255, 255, 0.1); /* Subtle hover effect */
+}
+
 /* Mobile Tweak */
 @media (max-width: 600px) {
   #navbar ul { flex-wrap: wrap; justify-content: center; }
