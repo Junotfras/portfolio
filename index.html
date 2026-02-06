@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Junotfras | Developer Portfolio</title>
+</head>
+<body>
+  <header id="header">
+    <nav id="navbar">
+      <ul>
+        <li><a class="nav-link" href="#welcome-section">About</a></li>
+        <li><a class="nav-link" href="#projects">Work</a></li>
+        <li><a class="nav-link" href="#contact">Contact</a></li>
+        <li><button id="theme-toggle" class="nav-link" aria-label="Toggle Dark Mode">☀️</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="welcome-section" class="welcome-section">
+      <h1>Junotfras</h1>
+      <p>Building functional, data-driven web applications.</p>
+    </section>
+
+    <section id="projects" class="projects">
+      <h2>Recent Projects</h2>
+
+      <div class="grid">
+        
+        <a class="project-tile" href="https://junotfras.github.io/calorie-tracker/" target="_blank" rel="noopener">
+          <img src="https://via.placeholder.com/600x400?text=Health+Dashboard" alt="Calorie Tracker App" />
+          <div class="tile-content">
+            <p class="tile-title">Health Data Dashboard</p>
+            <p class="tile-desc">Analytics tool with regex validation & dynamic forms.</p>
+          </div>
+        </a>
+
+        <a class="project-tile" href="https://junotfras.github.io/rpg-game/" target="_blank" rel="noopener">
+          <img src="https://via.placeholder.com/600x400?text=RPG+Battle+Game" alt="RPG Game" />
+          <div class="tile-content">
+            <p class="tile-title">RPG Battle Engine</p>
+            <p class="tile-desc">Turn-based logic with XP system and stat tracking.</p>
+          </div>
+        </a>
+
+        <a class="project-tile" href="https://junotfras.github.io/todo-app/" target="_blank" rel="noopener">
+          <img src="https://via.placeholder.com/600x400?text=TaskMaster+App" alt="Todo App" />
+          <div class="tile-content">
+            <p class="tile-title">TaskMaster</p>
+            <p class="tile-desc">Persistent CRUD application using LocalStorage.</p>
+          </div>
+        </a>
+
+         <a class="project-tile" href="https://junotfras.github.io/narrative-generator/" target="_blank" rel="noopener">
+            <img src="https://via.placeholder.com/600x400?text=Story+Generator" alt="Narrative Generator" />
+            <div class="tile-content">
+              <p class="tile-title">Narrative Engine</p>
+              <p class="tile-desc">Interactive DOM manipulation and string injection.</p>
+            </div>
+          </a>
+
+      </div> </section>
+
+    <section id="contact" class="contact">
+      <h2>Let’s work together</h2>
+      <p>Have a project in mind?</p>
+
+      <div class="social-icons">
+        <a id="profile-link" href="https://github.com/junotfras" target="_blank" rel="noopener">
+          GitHub Profile
+        </a>
+        <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:contact@junotfras.com">Email</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+        © 2024 Junotfras. Built for the 
+        <a href="https://www.freecodecamp.org/" target="_blank" rel="noopener">freeCodeCamp</a> curriculum.
+    </p>
+  </footer>
+  
+  <script src="script.js"></script>
+</body>
+</html>
