@@ -1,23 +1,41 @@
 /* =========================
-   Design tokens
+   Design Tokens & Variables
    ========================= */
 :root {
+  /* DARK MODE (Default) */
   --bg: #0f1115;
   --card: #161a22;
   --text: #e6e7eb;
   --muted: #a7adbb;
   --accent: #7aa2f7;
   --border: #262b36;
+  
+  /* UX Variables */
+  --nav-bg: rgba(22, 26, 34, 0.85);
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --hero-gradient: radial-gradient(circle at 20% 20%, rgba(122,162,247,0.15), transparent 40%),
+                   radial-gradient(circle at 80% 80%, rgba(122,162,247,0.08), transparent 40%);
+  --heading-gradient: linear-gradient(to right, #fff, #a7adbb);
 }
 
-/* Light Mode Overrides */
+/* LIGHT MODE OVERRIDES */
 body.light-mode {
   --bg: #ffffff;
-  --card: #f3f4f6;
+  --card: #ffffff;      /* Clean white card */
   --text: #1f2937;
   --muted: #6b7280;
-  --accent: #3b82f6;
+  --accent: #2563eb;    /* Slightly darker blue for readability on white */
   --border: #e5e7eb;
+  
+  /* UX Variables Swapped */
+  --nav-bg: rgba(255, 255, 255, 0.85); /* White frosted glass */
+  --shadow-color: rgba(0, 0, 0, 0.1);  /* Much softer shadow */
+  
+  /* Hero Gradient: Made slightly stronger so it shows up on white */
+  --hero-gradient: radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.15), transparent 40%),
+                   radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1), transparent 40%);
+                   
+  --heading-gradient: linear-gradient(to right, #111827, #4b5563);
 }
 
 /* =========================
@@ -25,12 +43,14 @@ body.light-mode {
    ========================= */
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+
 body {
   background: var(--bg);
   color: var(--text);
   font-family: system-ui, -apple-system, sans-serif;
   line-height: 1.55;
-  padding-top: 64px; /* Offset for fixed nav */
+  padding-top: 64px;
+  transition: background 0.3s ease, color 0.3s ease; /* Smooth toggle */
 }
 
 a { color: inherit; text-decoration: none; transition: color 0.2s;}
@@ -43,9 +63,11 @@ a:hover { color: var(--accent); }
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 1000;
-  background: rgba(22, 26, 34, 0.9); /* Slight transparency */
-  backdrop-filter: blur(10px);
+  background: var(--nav-bg); /* Uses variable now */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 #navbar ul {
@@ -61,15 +83,21 @@ a:hover { color: var(--accent); }
 #navbar .nav-link {
   font-weight: 600;
   padding: 0.5rem;
+  color: var(--text); /* Ensures text flips color automatically */
 }
 
 #theme-toggle {
-  background: none;
+  background: transparent;
   border: 1px solid var(--border);
   color: var(--text);
   cursor: pointer;
   border-radius: 8px;
   padding: 0.4rem 0.8rem;
+  transition: all 0.2s;
+}
+
+#theme-toggle:hover {
+  background: var(--border);
 }
 
 /* =========================
@@ -82,17 +110,16 @@ a:hover { color: var(--accent); }
   justify-content: center;
   align-items: center;
   text-align: center;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(122,162,247,0.1), transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(122,162,247,0.05), transparent 40%);
+  background: var(--hero-gradient); /* Uses variable now */
 }
 
 #welcome-section h1 {
   font-size: clamp(2.5rem, 5vw, 4rem);
   margin: 0;
-  background: linear-gradient(to right, #fff, var(--muted));
+  background: var(--heading-gradient); /* Uses variable now */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  padding-bottom: 10px; /* Prevents gradient clipping */
 }
 
 #welcome-section p {
@@ -116,13 +143,11 @@ a:hover { color: var(--accent); }
   margin-bottom: 3rem;
   border-bottom: 1px solid var(--border);
   padding-bottom: 1rem;
-  display: inline-block;
-  width: 100%;
+  color: var(--text);
 }
 
 .grid {
   display: grid;
-  /* Auto-fit makes it handle 1, 2, 3, or 4 items perfectly */
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
 }
@@ -132,14 +157,15 @@ a:hover { color: var(--accent); }
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
   display: flex;
   flex-direction: column;
 }
 
 .project-tile:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  /* Use the shadow variable for softer light-mode shadows */
+  box-shadow: 0 10px 30px var(--shadow-color); 
   border-color: var(--accent);
 }
 
@@ -148,6 +174,12 @@ a:hover { color: var(--accent); }
   height: 200px;
   object-fit: cover;
   border-bottom: 1px solid var(--border);
+  /* Optional: slightly dim images in dark mode to reduce glare, full brightness in light */
+  filter: brightness(0.9); 
+  transition: filter 0.3s;
+}
+body.light-mode .project-tile img {
+    filter: brightness(1);
 }
 
 .tile-content {
@@ -158,7 +190,12 @@ a:hover { color: var(--accent); }
   font-weight: 700;
   font-size: 1.2rem;
   margin: 0 0 0.5rem 0;
-  color: var(--accent);
+  color: var(--text); /* Changed from accent to text for better readability */
+}
+
+/* Optional: Keep title blue only on hover or leave as accent if you prefer */
+.project-tile:hover .tile-title {
+    color: var(--accent);
 }
 
 .tile-desc {
@@ -173,7 +210,8 @@ a:hover { color: var(--accent); }
 #contact {
   text-align: center;
   padding: 6rem 1rem;
-  background: linear-gradient(to top, var(--card), transparent);
+  /* Use a subtle gradient fade based on card color */
+  background: linear-gradient(to top, var(--card), transparent); 
 }
 
 .social-icons {
@@ -188,10 +226,14 @@ a:hover { color: var(--accent); }
     border: 1px solid var(--border);
     border-radius: 8px;
     font-weight: 600;
+    color: var(--text);
+    background: var(--card); /* Adds structure in light mode */
 }
 
 .social-icons a:hover {
-    background: var(--border);
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 4px 12px var(--shadow-color);
 }
 
 footer {
@@ -200,34 +242,7 @@ footer {
   border-top: 1px solid var(--border);
   color: var(--muted);
   font-size: 0.9rem;
-}
-
-/* =========================
-   LIGHT MODE OVERRIDES
-   ========================= */
-
-/* 1. Fix "Junotfras" Name Contrast */
-/* When in light mode, make the text gradient dark grey so it pops */
-body.light-mode #welcome-section h1 {
-  background: linear-gradient(to right, #111827, #4b5563);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* 2. Keep Navbar Dark & Legible */
-/* Even in light mode, force navbar text to stay light color */
-body.light-mode #navbar {
-  background: rgba(22, 26, 34, 0.95); /* Keep dark background */
-  border-bottom: 1px solid #262b36;   /* Keep dark border */
-}
-
-body.light-mode #navbar a,
-body.light-mode #navbar button {
-  color: #e6e7eb; /* Force white text */
-}
-
-body.light-mode #navbar .nav-link:hover {
-  background: rgba(255, 255, 255, 0.1); /* Subtle hover effect */
+  background: var(--bg);
 }
 
 /* Mobile Tweak */
